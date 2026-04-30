@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Best Friend Card</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <!-- CARD -->
+  <div class="card" id="card">                                   
+    <div class="card-top" id="card-top">
+      <div class="card-top-bg" id="header-bg"></div>
+      <span class="deco deco-left">💕</span>
+      <span class="deco deco-right">💕</span>
+
+      <div class="photo-wrap" onclick="document.getElementById('photo-input').click()">
+        <img id="photo-img" src="" alt="Friend photo" />
+        <div class="photo-placeholder" id="photo-placeholder">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke="#d1d5db" fill="none">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.172a2 2 0 001.414-.586l.828-.828A2 2 0 0110 5h4a2 2 0 011.414.586l.828.828A2 2 0 0017.828 7H18a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V9z"/>
+          </svg>
+          <span>Tap to add photo</span>
+        </div>
+      </div>
+      <input type="file" id="photo-input" class="hidden-input" accept="image/*" onchange="loadPhoto(event)" />
+
+      <div class="name" id="friend-name">Your Best Friend</div>
+      <div class="badge-row">
+        <span class="badge" id="friend-since">Since 2022</span>
+        <span class="badge" id="custom-badge">Best Friends</span>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="section-label">Personality vibes</div>
+      <div class="traits" id="traits-container">
+        <span class="trait">Funny</span>
+        <span class="trait">Loyal</span>
+        <span class="trait">Creative</span>
+        <span class="trait">Kind</span>
+      </div>
+
+      <div class="section-label">Our favourite memory</div>
+      <div class="memory-box">
+        <div class="memory-text" id="memory-text">That one road trip where everything went wrong but we laughed the whole time.</div>
+      </div>
+
+      <div class="section-label">Friendship stats</div>
+      <div class="stats">
+        <div class="stat stat-1">
+          <div class="stat-val" id="years-val">&#8734;</div>
+          <div class="stat-lbl">Years Forever</div>
+        </div>
+        <div class="stat stat-2">
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl">Trust</div>
+        </div>
+        <div class="stat stat-3">
+          <div class="stat-val">&#8734;</div>
+          <div class="stat-lbl">Memories</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer" id="footer-text">Friendship Forever ✨</div>
+
+    <!-- CIRCLE LOGO BUTTONS INSIDE CARD -->
+    <div class="circle-btns" id="share-btns">
+      <!-- Download -->
+      <button class="circle-btn btn-dl" onclick="downloadCard()" title="Download as Image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v12m0 0l-4-4m4 4l4-4"/>
+          <path d="M4 20h16"/>
+        </svg>
+      </button>
+      <!-- WhatsApp -->
+      <button class="circle-btn btn-wa" onclick="shareWhatsApp()" title="Share via WhatsApp">
+        <svg viewBox="0 0 24 24" fill="#fff">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.878-1.426A9.953 9.953 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.95 7.95 0 01-4.076-1.117l-.292-.173-3.024.884.845-3.083-.19-.298A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+        </svg>
+      </button>
+      <!-- Email -->
+      <button class="circle-btn btn-em" onclick="shareEmail()" title="Share via Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7l10 7 10-7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="editor">
+    <h2>🌟 Customize your card</h2>
+
+    <div class="field">
+      <label>Upload background image</label>
+      <div class="upload-btn" onclick="document.getElementById('bg-input').click()">🖼️ Choose background image</div>
+      <input type="file" id="bg-input" class="hidden-input" accept="image/*" onchange="loadBackground(event)" />
+    </div>
+
+    <div class="field">
+      <label>Upload friend photo</label>
+      <div class="upload-btn" onclick="document.getElementById('photo-input').click()">📷 Choose a photo</div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field form-full">
+        <label>Friend's name</label>
+        <input type="text" id="input-name" placeholder="e.g. Nisha" />
+      </div>
+
+      <div class="field">
+        <label>Friends since</label>
+        <input type="text" id="input-since" placeholder="e.g. 2022" />
+      </div>
+
+      <div class="field">
+        <label>Custom badge</label>
+        <input type="text" id="input-badge" placeholder="e.g. Best Friends" />
+      </div>
+
+      <div class="field form-full">
+        <label>Traits (comma separated)</label>
+        <input type="text" id="input-traits" placeholder="e.g. Funny, Loyal, Smart" />
+      </div>
+
+      <div class="field form-full">
+        <label>Favourite memory</label>
+        <textarea id="input-memory" rows="3" placeholder="Write a sweet memory..."></textarea>
+      </div>
+
+      <div class="field form-full">
+        <label>Footer message</label>
+        <input type="text" id="input-footer" placeholder="e.g. Friendship Forever" />
+      </div>
+
+      <div class="field form-full">
+        <label>Years together</label>
+        <input type="text" id="input-years" placeholder="e.g. 5 or leave blank for &#8734;" />
+      </div>
+    </div>
+
+    <button class="update-btn" onclick="updateCard()">Update card 🎉</button>
+  </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
