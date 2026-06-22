@@ -10,7 +10,63 @@
 <body>
 <div class="page">
 
-  <!-- CARD -->
+   <!-- EDITOR -->
+  <div class="editor">
+    <h2>🌟 Customize your card</h2>
+
+    <div class="field">
+      <label>Upload background image</label>
+      <div class="upload-btn" onclick="document.getElementById('bg-input').click()">🖼️ Choose background image</div>
+      <input type="file" id="bg-input" class="hidden-input" accept="image/*" onchange="loadBackground(event)" />
+    </div>
+
+    <div class="field">
+      <label>Upload friend photo</label>
+      <div class="upload-btn" onclick="document.getElementById('photo-input').click()">📷 Choose a photo</div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field form-full">
+        <label>Friend's name</label>
+        <input type="text" id="input-name" placeholder="e.g. Nisha" />
+      </div>
+
+      <div class="field">
+        <label>Friends since</label>
+        <input type="text" id="input-since" placeholder="e.g. 2022" />
+      </div>
+
+      <div class="field">
+        <label>Custom badge</label>
+        <input type="text" id="input-badge" placeholder="e.g. Best Friends" />
+      </div>
+
+      <div class="field form-full">
+        <label>Traits (comma separated)</label>
+        <input type="text" id="input-traits" placeholder="e.g. Funny, Loyal, Smart" />
+      </div>
+
+      <div class="field form-full">
+        <label>Favourite memory</label>
+        <textarea id="input-memory" rows="3" placeholder="Write a sweet memory..."></textarea>
+      </div>
+
+      <div class="field form-full">
+        <label>Footer message</label>
+        <input type="text" id="input-footer" placeholder="e.g. Friendship Forever" />
+      </div>
+
+      <div class="field form-full">
+        <label>Years together</label>
+        <input type="text" id="input-years" placeholder="e.g. 5 or leave blank for &#8734;" />
+      </div>
+    </div>
+
+    <button class="update-btn" onclick="updateCard()">Update card 🎉</button>
+  </div>
+
+</div>
+   <!-- CARD -->
   <div class="card" id="card">                                   
     <div class="card-top" id="card-top">
       <div class="card-top-bg" id="header-bg"></div>
@@ -94,63 +150,6 @@
       </button>
     </div>
   </div>
-
-  <!-- EDITOR -->
-  <div class="editor">
-    <h2>🌟 Customize your card</h2>
-
-    <div class="field">
-      <label>Upload background image</label>
-      <div class="upload-btn" onclick="document.getElementById('bg-input').click()">🖼️ Choose background image</div>
-      <input type="file" id="bg-input" class="hidden-input" accept="image/*" onchange="loadBackground(event)" />
-    </div>
-
-    <div class="field">
-      <label>Upload friend photo</label>
-      <div class="upload-btn" onclick="document.getElementById('photo-input').click()">📷 Choose a photo</div>
-    </div>
-
-    <div class="form-grid">
-      <div class="field form-full">
-        <label>Friend's name</label>
-        <input type="text" id="input-name" placeholder="e.g. Nisha" />
-      </div>
-
-      <div class="field">
-        <label>Friends since</label>
-        <input type="text" id="input-since" placeholder="e.g. 2022" />
-      </div>
-
-      <div class="field">
-        <label>Custom badge</label>
-        <input type="text" id="input-badge" placeholder="e.g. Best Friends" />
-      </div>
-
-      <div class="field form-full">
-        <label>Traits (comma separated)</label>
-        <input type="text" id="input-traits" placeholder="e.g. Funny, Loyal, Smart" />
-      </div>
-
-      <div class="field form-full">
-        <label>Favourite memory</label>
-        <textarea id="input-memory" rows="3" placeholder="Write a sweet memory..."></textarea>
-      </div>
-
-      <div class="field form-full">
-        <label>Footer message</label>
-        <input type="text" id="input-footer" placeholder="e.g. Friendship Forever" />
-      </div>
-
-      <div class="field form-full">
-        <label>Years together</label>
-        <input type="text" id="input-years" placeholder="e.g. 5 or leave blank for &#8734;" />
-      </div>
-    </div>
-
-    <button class="update-btn" onclick="updateCard()">Update card 🎉</button>
-  </div>
-
-</div>
 <script src="script.js"></script>
 </body>
 </html>
