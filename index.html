@@ -107,6 +107,19 @@
       <label>Background image</label>
       <div class="upload-btn" onclick="document.getElementById('bg-input').click()">🖼️ Choose background image</div>
       <input type="file" id="bg-input" class="hidden-input" accept="image/*" onchange="loadBackground(event)" />
+      <div class="zoom-row">
+        <button class="zoom-btn" onclick="zoomBg(-10)">🔍 Zoom out</button>
+        <button class="zoom-btn" onclick="zoomBg(10)">🔎 Zoom in</button>
+      </div>
+      <div class="arrow-pad">
+        <button class="arrow-btn" onclick="moveBg('up')">▲</button>
+        <div class="arrow-middle">
+          <button class="arrow-btn" onclick="moveBg('left')">◀</button>
+          <span class="arrow-center">BG</span>
+          <button class="arrow-btn" onclick="moveBg('right')">▶</button>
+        </div>
+        <button class="arrow-btn" onclick="moveBg('down')">▼</button>
+      </div>
     </div>
     <div class="field">
       <label>Friend's photo</label>
