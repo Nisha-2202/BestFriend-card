@@ -28,6 +28,7 @@
         </div>
       </div>
       <input type="file" id="photo-input" class="hidden-input" accept="image/*" onchange="loadPhoto(event)" />
+      <div class="adjust-hint" id="adjust-hint">👆 Drag to adjust</div>
 
       <div class="name" id="friend-name">Your Best Friend</div>
       <div class="badge-row">
@@ -110,6 +111,10 @@
     <div class="field">
       <label>Friend's photo</label>
       <div class="upload-btn" onclick="document.getElementById('photo-input').click()">📷 Choose a photo</div>
+      <div class="zoom-row">
+        <button class="zoom-btn" onclick="zoomPhoto(-10)">🔍 Zoom out</button>
+        <button class="zoom-btn" onclick="zoomPhoto(10)">🔎 Zoom in</button>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -118,12 +123,12 @@
 
     <div class="field">
       <label>Friend's name</label>
-      <input type="text" id="input-name" placeholder="e.g. Nisha" />
+      <input type="text" id="input-name" placeholder="e.g. Priya" />
     </div>
     <div class="two-col">
       <div class="field">
         <label>Friends since</label>
-        <input type="text" id="input-since" placeholder="e.g. 2022" />
+        <input type="text" id="input-since" placeholder="e.g. 2019" />
       </div>
       <div class="field">
         <label>Years (blank = ∞)</label>
@@ -132,7 +137,7 @@
     </div>
     <div class="field">
       <label>Custom badge</label>
-      <input type="text" id="input-badge" placeholder="e.g. Best Friend" />
+      <input type="text" id="input-badge" placeholder="e.g. Soul Sister" />
     </div>
     <div class="field">
       <label>Traits (comma separated)</label>
