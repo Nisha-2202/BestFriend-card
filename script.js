@@ -30,11 +30,11 @@ function loadBackground(event) {
 function updateCard() {
   var name      = document.getElementById('input-name').value.trim();
   var since     = document.getElementById('input-since').value.trim();
+  var years     = document.getElementById('input-years').value.trim();
   var badge     = document.getElementById('input-badge').value.trim();
   var traitsRaw = document.getElementById('input-traits').value.trim();
   var memory    = document.getElementById('input-memory').value.trim();
   var footer    = document.getElementById('input-footer').value.trim();
-  var years     = document.getElementById('input-years').value.trim();
 
   if (name)  document.getElementById('friend-name').textContent = name;
   if (badge) document.getElementById('custom-badge').textContent = badge;
@@ -101,7 +101,6 @@ function shareEmail() {
     'I made this special card just for you!\n\n' +
     '\u2728 You are: ' + traits + '\n\n' +
     '\ud83d\udc9b Our favourite memory:\n' + memory + '\n\n' +
-    footer + '\n\n' +
-    'With love always! \ud83c\udf89';
+    footer + '\n\nWith love always! \ud83c\udf89';
   window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
