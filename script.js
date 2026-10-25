@@ -1,3 +1,7 @@
+/* ── Photo drag-to-adjust ── */
+var photoPosX = 50, photoPosY = 50;
+var isDragging = false, startX, startY, startPosX, startPosY;
+
 function loadPhoto(event) {
   var file = event.target.files[0];
   if (!file) return;
@@ -6,11 +10,61 @@ function loadPhoto(event) {
     var img = document.getElementById('photo-img');
     img.src = e.target.result;
     img.style.display = 'block';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.objectPosition = '50% 50%';
+    img.style.cursor = 'grab';
+    photoPosX = 50;
+    photoPosY = 50;
     document.getElementById('photo-placeholder').style.display = 'none';
+    document.getElementById('adjust-hint').style.display = 'block';
+    setTimeout(function () {
+      document.getElementById('adjust-hint').style.display = 'none';
+    }, 3000);
   };
   reader.readAsDataURL(file);
 }
 
+function getClientPos(e) {
+  if (e.touches) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  return { x: e.clientX, y: e.clientY };
+}
+
+function onDragStart(e) {
+  var img = document.getElementById('photo-img');
+  if (img.style.display === 'none' || !img.src) return;
+  isDragging = true;
+  var pos = getClientPos(e);
+  startX = pos.x;
+  startY = pos.y;
+  startPosX = photoPosX;
+  startPosY = photoPosY;
+  img.style.cursor = 'grabbing';
+  e.preventDefault();
+}
+
+function onDragMove(e) {
+  if (!isDragging) return;
+  var img = document.getElementById('photo-img');
+  var wrap = document.getElementById('photo-wrap');
+  var pos = getClientPos(e);
+  var dx = pos.x - startX;
+  var dy = pos.y - startY;
+  var sensitivity = 0.3;
+  photoPosX = Math.min(100, Math.max(0, startPosX - dx * sensitivity));
+  photoPosY = Math.min(100, Math.max(0, startPosY - dy * sensitivity));
+  img.style.objectPosition = photoPosX + '% ' + photoPosY + '%';
+  e.preventDefault();
+}
+
+function onDragEnd() {
+  isDragging = false;
+  var img = document.getElementById('photo-img');
+  if (img) img.style.cursor = 'grab';
+}
+
+/* ── Background load ── */
 function loadBackground(event) {
   var file = event.target.files[0];
   if (!file) return;
@@ -27,6 +81,7 @@ function loadBackground(event) {
   reader.readAsDataURL(file);
 }
 
+/* ── Update card ── */
 function updateCard() {
   var name      = document.getElementById('input-name').value.trim();
   var since     = document.getElementById('input-since').value.trim();
@@ -63,9 +118,12 @@ function updateCard() {
   if (footer) document.getElementById('footer-text').textContent = footer + ' \u2728';
 }
 
+/* ── Download ── */
 function downloadCard() {
   var btns = document.getElementById('share-btns');
+  var hint = document.getElementById('adjust-hint');
   btns.style.display = 'none';
+  if (hint) hint.style.display = 'none';
   html2canvas(document.getElementById('card'), {
     scale: 2,
     useCORS: true,
@@ -82,6 +140,7 @@ function downloadCard() {
   });
 }
 
+/* ── Share ── */
 function shareWhatsApp() {
   var name   = document.getElementById('friend-name').textContent;
   var memory = document.getElementById('memory-text').textContent;
@@ -103,4 +162,26 @@ function shareEmail() {
     '\ud83d\udc9b Our favourite memory:\n' + memory + '\n\n' +
     footer + '\n\nWith love always! \ud83c\udf89';
   window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
+
+/* ── Event listeners ── */
+window.addEventListener('DOMContentLoaded', function () {
+  var wrap = document.getElementById('photo-wrap');
+  wrap.addEventListener('mousedown', onDragStart);
+  wrap.addEventListener('touchstart', onDragStart, { passive: false });
+  window.addEventListener('mousemove', onDragMove);
+  window.addEventListener('touchmove', onDragMove, { passive: false });
+  window.addEventListener('mouseup', onDragEnd);
+  window.addEventListener('touchend', onDragEnd);
+});
+
+/* ── Zoom photo ── */
+var photoScale = 100;
+function zoomPhoto(delta) {
+  var img = document.getElementById('photo-img');
+  if (!img || img.style.display === 'none') return;
+  photoScale = Math.min(200, Math.max(80, photoScale + delta));
+  img.style.width = photoScale + '%';
+  img.style.height = photoScale + '%';
+  img.style.objectFit = 'cover';
 }
