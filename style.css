@@ -354,3 +354,46 @@ body {
   .toast { width: 360px; }
   .field input, .field textarea { font-size: 13px; }
 }
+
+/* ── Photo adjust hint ── */
+.adjust-hint {
+  display: none;
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.photo-wrap {
+  position: relative;
+}
+
+/* ── Zoom buttons ── */
+.zoom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.zoom-btn {
+  padding: 8px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  background: #fafafa;
+  cursor: pointer;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.zoom-btn:active { background: #f3f0ff; border-color: #c4b5fd; }
