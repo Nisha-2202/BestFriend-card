@@ -185,3 +185,35 @@ function zoomPhoto(delta) {
   img.style.height = photoScale + '%';
   img.style.objectFit = 'cover';
 }
+
+/* ── Background position adjust ── */
+var bgPosX = 50, bgPosY = 50;
+
+function moveBg(direction) {
+  var step = 10;
+  if (direction === 'left')  bgPosX = Math.max(0,   bgPosX - step);
+  if (direction === 'right') bgPosX = Math.min(100, bgPosX + step);
+  if (direction === 'up')    bgPosY = Math.max(0,   bgPosY - step);
+  if (direction === 'down')  bgPosY = Math.min(100, bgPosY + step);
+
+  var pos = bgPosX + '% ' + bgPosY + '%';
+
+  /* page background */
+  document.body.style.backgroundPosition = pos;
+
+  /* card header overlay */
+  var hdr = document.getElementById('header-bg');
+  if (hdr) hdr.style.backgroundPosition = pos;
+}
+
+function zoomBg(delta) {
+  var current = window._bgScale || 100;
+  current = Math.min(200, Math.max(60, current + delta));
+  window._bgScale = current;
+
+  var size = current + '%';
+  document.body.style.backgroundSize = size + ' auto';
+
+  var hdr = document.getElementById('header-bg');
+  if (hdr) hdr.style.backgroundSize = size + ' auto';
+}
